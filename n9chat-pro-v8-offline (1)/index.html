@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+  <!-- SECURITE -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(self), geolocation=()" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob:; connect-src 'self' https://api.groq.com; media-src 'self' blob:; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nocache, noimageindex" />
+
+  <!-- PWA -->
+  <title>N9chat Pro</title>
+  <meta name="description" content="Interface d'intelligence analytique avancee N9chat Pro." />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="N9chat Pro" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%232563eb'/%3E%3Cpath d='M32 68V32L50 50L68 32V68' stroke='white' stroke-width='9' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%232563eb'/%3E%3Cpath d='M32 68V32L50 50L68 32V68' stroke='white' stroke-width='9' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+
+  <!-- PERFORMANCE: preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <link rel="dns-prefetch" href="https://api.groq.com" />
+
+  <!-- CRITICAL CSS inline -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;overflow:hidden;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+    body{font-family:system-ui,sans-serif;background:#f0f4ff;color:#0f1c3f;-webkit-tap-highlight-color:transparent}
+    #root{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column}
+    .boot-loader{position:fixed;inset:0;background:#f0f4ff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;z-index:99999;transition:opacity .4s ease}
+    .boot-loader.hide{opacity:0;pointer-events:none}
+    .boot-logo{width:72px;height:72px;border-radius:22%;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;animation:bp 1.8s ease-in-out infinite}
+    @keyframes bp{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,99,235,.3)}50%{transform:scale(1.05);box-shadow:0 0 0 14px rgba(37,99,235,0)}}
+    .boot-bar{width:160px;height:3px;background:#dde5f5;border-radius:99px;overflow:hidden}
+    .boot-fill{height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:99px;animation:bf 1.6s cubic-bezier(.4,0,.2,1) forwards}
+    @keyframes bf{from{width:0}to{width:100%}}
+    .boot-label{font-size:.65rem;font-weight:700;color:#8fa3c8;letter-spacing:.12em;text-transform:uppercase}
+    @media print{body{display:none!important}}
+    body{-webkit-user-select:none;-moz-user-select:none;user-select:none}
+    input,textarea{-webkit-user-select:text;-moz-user-select:text;user-select:text}
+  </style>
+
+  <!-- CSS principal: preload non-bloquant -->
+  <link rel="preload" href="./style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="./style.css" /></noscript>
+
+  <!-- KaTeX CSS: non-bloquant -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin />
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" /></noscript>
+</head>
+<body>
+
+  <div class="boot-loader" id="bootLoader">
+    <div class="boot-logo">
+      <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+        <path d="M32 68V32L50 50L68 32V68" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="boot-bar"><div class="boot-fill"></div></div>
+    <span class="boot-label">N9chat Pro</span>
+  </div>
+
+  <div id="root"></div>
+
+  <!-- Scripts en defer: ne bloquent pas le rendu -->
+  <script defer src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" crossorigin></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin></script>
+  <script defer src="./api.js"></script>
+  <script defer src="./app.js"></script>
+
+  <script>
+    window.__N9_READY__ = function() {
+      var el = document.getElementById('bootLoader');
+      if (el) { el.classList.add('hide'); setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 500); }
+    };
+    // ── URL du backend — modifiez cette ligne après déploiement ──
+    window.N9_BACKEND_URL = 'http://localhost:3001/api';
+    // Exemple production : window.N9_BACKEND_URL = 'https://votre-backend.railway.app/api';
+  </script>
+
+</body>
+</html>
